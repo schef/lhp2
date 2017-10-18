@@ -2,7 +2,7 @@
 #include <iostream>
 #include <algorithm>
 
-#include "patcher.hpp"
+#include "lilytools.hpp"
 
 #define TONE_MIDDLE_C 60
 #define OCTAVE 12
@@ -11,7 +11,6 @@ using namespace std;
 
 typedef map<string, uint8_t> LilyBase;
 typedef map<string, uint8_t> LilyOctaves;
-typedef map<const char, string> CharLily;
 
 LilyOctaves lilyOctaves = {
     { ",,,",  TONE_MIDDLE_C - OCTAVE * 4 },
@@ -39,64 +38,6 @@ LilyBase lilyBase = {
     { "h",   11 },
 };
 
-CharLily charLily = {
-    /* string e */
-    { 'z',  "e,"   },
-    { 'x',  "f,"   },
-    { 'c',  "fis," },
-    { 'v',  "g,"   },
-    { 'b',  "gis," },
-    { 'n',  "a,"   },
-    { 'm',  "ais," },
-    { ',',  "h,"   },
-    { '.',  "c"    },
-    { '/',  "cis"  },
-    /* string a */
-    { 'a',  "a,"   },
-    { 's',  "ais," },
-    { 'd',  "h,"   },
-    { 'f',  "c"    },
-    { 'g',  "cis"  },
-    { 'h',  "d"    },
-    { 'j',  "dis"  },
-    { 'k',  "e"    },
-    { 'l',  "f"    },
-    { ';',  "fis"  },
-    { '\'', "g"    },
-    /* string a */
-    { 'q',  "d"    },
-    { 'w',  "dis"  },
-    { 'e',  "e"    },
-    { 'r',  "f"    },
-    { 't',  "fis"  },
-    { 'y',  "g"    },
-    { 'u',  "gis"  },
-    { 'i',  "a"    },
-    { 'o',  "ais"  },
-    { 'p',  "h"    },
-    { '[',  "c'"   },
-    { ']',  "cis'" },
-    { '\\', "d'"   },
-    /* string g */
-    { '1',  "g"    },
-    { '2',  "gis"  },
-    { '3',  "a"    },
-    { '4',  "ais"  },
-    { '5',  "h"    },
-    { '6',  "c'"   },
-    { '7',  "cis'" },
-    { '8',  "d'"   },
-    { '9',  "dis'" },
-    { '0',  "e'"   },
-    { '-',  "f'"   },
-    { '=',  "fis'" },
-};
-
-string getLilyFromChar(char key)
-{
-    return(charLily[key]);
-}
-
 bool isNotAlnum(char c) {
     return(isalnum(c) == 0);
 }
@@ -119,9 +60,8 @@ uint8_t getBaseFromLily(string lily)
     return(base);
 }
 
-uint8_t getMidiFromKey(char key)
+uint8_t getMidiFromLily(string lily)
 {
-    string lily = getLilyFromChar(key);
     uint8_t octave = getOctaveFromLily(lily);
     uint8_t base = getBaseFromLily(lily);
     uint8_t midi = base + octave;

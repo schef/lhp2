@@ -1,5 +1,5 @@
-#ifndef _patcher_hpp
-#define _patcher_hpp
+#ifndef _strings_hpp
+#define _strings_hpp
 
 uint8_t getMidiFromKey(char key);
 
