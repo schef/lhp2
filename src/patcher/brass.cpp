@@ -8,6 +8,7 @@ using namespace std;
 
 typedef map<uint8_t, bool> Position;
 typedef map<uint8_t, string> Aliquotes;
+typedef map<uint8_t, uint8_t> Fingering;
 typedef map<const char, uint8_t> Keyboard;
 
 Position lipPosition = {
@@ -35,6 +36,13 @@ Aliquotes aliquotes = {
 	{ 5, "f,"  },
 	{ 6, "as," },
 	{ 7, "b"   },
+};
+
+Fingering fingering = {
+	{ 1, 2 },
+	{ 2, 1 },
+	{ 3, 3 },
+	{ 4, 5 },
 };
 
 Keyboard fingerKeyboard = {
@@ -75,10 +83,13 @@ void setLipPosition(uint8_t position, bool state)
 uint8_t getFingerPosition(void)
 {
 	uint8_t position = 0;
-	if (fingerPosition[1]) position += 2;
-	if (fingerPosition[2]) position += 1;
-	if (fingerPosition[3]) position += 3;
-	if (fingerPosition[4]) position += 5;
+	for(auto const &ent : fingerPosition)
+	{
+		if(ent.second)
+		{
+			position += fingering[ent.first];
+		}
+	}
 	return(position);
 }
 
