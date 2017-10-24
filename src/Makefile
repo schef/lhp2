@@ -6,10 +6,10 @@ CXXFLAGS += -g -Wall
 CXXFLAGS += -std=c++11
 
 SRC_FILES += \
-  $(PROJ_DIR)/main.cpp \
+	$(PROJ_DIR)/main.cpp \
 
 INC_FOLDERS += \
-  $(PROJ_DIR)/ \
+	$(PROJ_DIR)/ \
 
 INC_PARAMS=$(foreach d, $(INC_FOLDERS), -I$d)
 
